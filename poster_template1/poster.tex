@@ -1,0 +1,177 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX poster template
+% Created by Nathaniel Johnston
+% August 2009
+% http://www.nathanieljohnston.com/index.php/2009/08/latex-poster-template/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{beamer}
+\usepackage{times}
+\usepackage{amsmath,amsthm,amssymb,latexsym}
+\boldmath
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{color}
+\usepackage{type1cm}
+\usepackage[scale=1.15]{beamerposter}
+\usepackage{graphicx}			% allows us to import images
+\usepackage{caption}
+
+% \usepackage{stfloats}
+\usepackage{subfig}
+% \usepackage{fixltx2e}
+
+\definecolor{darkgreen}{rgb}{0.05,.3,0.05}
+
+%-----------------------------------------------------------
+% Define the column width and poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and how much separation you want between columns
+% The separation I chose is 0.024 and I want 4 columns
+% Then set onecolwid to be (1-(4+1)*0.024)/4 = 0.22
+% Set twocolwid to be 2*onecolwid + sepwid = 0.464
+%-----------------------------------------------------------
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\newlength{\fourcolwid}
+%\setlength{\paperwidth}{72in}
+%\setlength{\paperheight}{42in}
+\setlength{\paperwidth}{36in}
+\setlength{\paperheight}{48in}
+\setlength{\sepwid}{0.024\paperwidth}
+\setlength{\onecolwid}{0.301333\paperwidth}
+\setlength{\twocolwid}{0.626666\paperwidth}
+\setlength{\threecolwid}{0.952\paperwidth}
+\setlength{\topmargin}{-0.5in}
+\usetheme{confposter}
+
+%-----------------------------------------------------------
+% Define colours (see beamerthemeconfposter.sty to change these colour definitions)
+%-----------------------------------------------------------
+
+\setbeamercolor{block title}{fg=ngreen,bg=white}
+\setbeamercolor{block body}{fg=black,bg=white}
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70}
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
+
+%-----------------------------------------------------------
+% Name and authors of poster/paper/research
+%-----------------------------------------------------------
+
+\title{}
+\author{Jay High, Josh Osborne}
+\institute{Computer Science Department, Western Washington University}
+
+%-----------------------------------------------------------
+% Start the poster itself
+%-----------------------------------------------------------
+% The \rmfamily command is used frequently throughout the poster to force a serif font to be used for the body text
+% Serif font is better for small text, sans-serif font is better for headers (for readability reasons)
+%-----------------------------------------------------------
+
+%% BH: Figure 4.1 in Kolda and Bader is a good one to include
+
+\begin{document}
+\begin{frame}[t]
+	\begin{columns}[t,totalwidth=\threecolwid] % the [t] option aligns the column's content at the top
+		\begin{column}{\sepwid}\end{column}	% empty spacer column
+		%% COLUMN ONE
+		\begin{column}{\onecolwid}
+			\begin{block}{Abstract}
+				\large
+				\rmfamily{
+				\textbf{Motivation:} Current services that offer hyper parameter optimization are unwieldy or prohibitively expensive. 
+				
+				\vskip1ex
+				\textbf{Goal:} Create a tool that is free, intuitive to use, and offers support for multiple optimization methods.
+				} % end rmfamily
+			\end{block}
+			\vskip2ex
+			\begin{block}{Background} 
+			\large			
+			\rmfamily{
+				\begin{itemize}
+					\item Hyperparameters are settings of a machine learning algorithm that cannot be trained
+					\item Configurations of these hyperparameters can dictate the efficacy of a model
+					\item PICTURE OF LEARNING RATE VS COST GOES HERE
+				\end{itemize}
+				
+				%Insert first picture here
+				\begin{itemize}
+					\item Heuristic tuning is slow and requires expert level intuition 
+				\end{itemize}
+			}
+			\end{block}
+		\end{column}
+		\begin{column}{\sepwid}\end{column}			% empty spacer column
+		%%%% COLUMN TWO
+		\begin{column}{\onecolwid}
+			
+			\vskip2ex
+			\begin{block}{Grid Search}
+			\rmfamily{
+				Grid search splits the parameter space into a grid of points. These points are then exhaustively sampled. 	
+				GRID SEARCH PICTURE GOES HERE
+				% bulleted lists go here
+			}
+			\end{block}
+			\begin{block}{Random Search}
+			\rmfamily{
+				Random search selects configurations at random from their selected ranges. It has been found to outperform heuristic tuning as well as Grid Search.
+				RANDOM SEARCH PICTURE GOES HERE
+				% picture here
+			}
+			\end{block}
+			\begin{block}{Bayesian Optimization}
+			\rmfamily{
+				%In cases where training evaluations are extremely expensive, there is a need for faster tuning methods.
+				Bayesian Optimization takes in all previous evaluations and creates a multivariate Gaussian Process to model the hyper parameter space. 
+				It uses a mix of exploration and exploitation to generate future configurations with minimal use of expensive training evaluations. 
+				GUASSIAN PICTURE GOES HERE
+				%These solutions all generate a function that attempts to model the objective function. This model is then used to predict behaviour at future test points.
+				%More points improve the model.
+				%Solutions vary in the model and in how they trade off exploration vs. exploitation. 
+				%Bayesian Optimization is a type of Surrogate Model solution which given a history of previous evaluations generates a gaussian process of all potential evaluations.
+				%This process is then used to generate new future evaluations. Bayesian Optimization has been shown to beat out other popular methods of tuning. 
+				
+				% bulleted lists go here
+			}
+			\end{block}
+		\end{column}
+		\begin{column}{\sepwid}\end{column}			% empty spacer column
+		%% COLUMN THREE
+		\begin{column}{\onecolwid}
+			\begin{block}{Our Product}
+				\large
+				\rmfamily{
+				 Tinker is a web service that allows clients to utilize the aforementioned optimization algorithms without need for implementation. 
+				 ARCHITECTURE GOES HERE
+				 CLIENT API GOES HERE
+				} % end rmfamily
+			\end{block}
+			\vskip2ex
+			\begin{block}{Future Work}
+			\rmfamily
+			\large{
+				We plan on implementing other state of the art optimization methods such as HORDE and Tree of Parzen's Estimators.
+				
+				% bulleted lists go here
+			}
+			\end{block}
+			\begin{block}{References}
+			\rmfamily
+			\large{
+				%PLEASE FIX :)				
+				%Guassian Process [Digital image]. (n.d.). Retrieved May 10, 2017, from http://scikit-learn.org/0.17/modules/gaussian_process.html
+				%Guassian Process [Digital image]. (n.d.). Retrieved May 10, 2017, from [Guassian Process]. (n.d.). Retrieved from http://blogs.sas.com/content/subconsciousmusings/2016/09/20/local-search-optimization-for-h yperparameter-tuning/
+
+				% bulleted lists go here
+			}
+			\end{block}
+		\end{column}
+		\begin{column}{\sepwid}\end{column}			% empty spacer column
+\end{columns}
+\end{frame}
+\end{document}
